@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
 
+const dotenv = require("dotenv");
+
 const products = require("./data/product");
 
 const PORT = process.env.PORT || 5000;
+
+dotenv.config();
 
 app.get("/", (req, res) => {
   res.send("API is running...");
