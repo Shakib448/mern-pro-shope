@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import Products from "../../../Resources/products";
 import Rating from "../Rating/Rating";
+import Axios from "axios";
 
 const ProductScreen = () => {
-  const { id } = useParams();
-  const product = Products.find((p) => p._id === id);
+  const [product, setProduct] = useState({});
+
+  let { id } = useParams();
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await Axios.get(`/api/products/${id}`);
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [id]);
 
   return (
     <>
