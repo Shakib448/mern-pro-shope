@@ -8,7 +8,9 @@
     "start": "node server",
     "server": "nodemon serve",
     "client": "npm start --prefix ../client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import" : "node seeder",
+    "data:destroy" : "node seeder -d"
   },
   "author": "MUKTADIR",
   "license": "ISC",
