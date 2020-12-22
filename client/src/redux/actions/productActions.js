@@ -13,6 +13,8 @@ export const listProduct = () => async (dispatch) => {
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
+    console.log(error.response.data.message);
+
     dispatch({
       type: PRODUCT_LIST_FAIL,
       payload:

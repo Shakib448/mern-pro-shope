@@ -11,8 +11,6 @@ const initialState = {};
 
 const middleware = [thunk];
 
-console.log(middleware);
-
 const store = createStore(
   reducer,
   initialState,
