@@ -45,12 +45,22 @@ const CartScreen = () => {
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to='/'>Go Back</Link>{" "}
+            Your cart is empty{" "}
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "black",
+                fontWeight: "bold",
+              }}
+              to='/'
+            >
+              Go Back
+            </Link>{" "}
           </Message>
         ) : (
           <ListGroup variant='flush'>
             {cartItems.map((item) => (
-              <ListGroup.Item key={item.id}>
+              <ListGroup.Item key={item.product}>
                 <Row>
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid rounded />
@@ -120,7 +130,7 @@ const CartScreen = () => {
               <Button
                 type='button'
                 className='btn-block'
-                disable={cartItems.length === 0}
+                disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
                 variant='dark'
               >
