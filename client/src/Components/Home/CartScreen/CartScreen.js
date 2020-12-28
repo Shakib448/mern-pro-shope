@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 
 import { useParams, useLocation, useHistory, Link } from "react-router-dom";
-import { addToCart } from "../../../redux/actions/cartActions";
+import { addToCart, removeFromCart } from "../../../redux/actions/cartActions";
 import Message from "../../Message/Message";
 
 const CartScreen = () => {
@@ -31,8 +31,8 @@ const CartScreen = () => {
     }
   }, [dispatch, id, qty]);
 
-  const removeFromCart = (id) => {
-    console.log(id);
+  const removeFromCartItem = (id) => {
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
@@ -92,7 +92,7 @@ const CartScreen = () => {
                     <Button
                       type='button'
                       variant='light'
-                      onClick={() => removeFromCart(item.product)}
+                      onClick={() => removeFromCartItem(item.product)}
                     >
                       <i className='fas fa-trash'></i> Remove
                     </Button>
