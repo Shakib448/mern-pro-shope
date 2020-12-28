@@ -16,7 +16,7 @@ import Loader from "../../Loader/Loader";
 import Message from "../../Message/Message";
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetail);
@@ -94,7 +94,7 @@ const ProductScreen = () => {
                           onChange={(e) => setQty(e.target.value)}
                         >
                           {[...Array(product.countInStock).keys()].map((x) => (
-                            <option kye={x + 1} value={x + 1}>
+                            <option key={x + 1} value={x + 1}>
                               {" "}
                               {x + 1}{" "}
                             </option>
