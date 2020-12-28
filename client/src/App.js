@@ -4,6 +4,7 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProductScreen from "./Components/Home/ProductScreen/ProductScreen";
+import CartScreen from "./Components/Home/CartScreen/CartScreen";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
           <Container>
             <Switch>
               <Route exact path='/' component={Home} />
-              <Route path='/product/:id' component={ProductScreen} />
+              <Route exact path='/product/:id' component={ProductScreen} />
+              <Route exact path='/cart/:id?' component={CartScreen} />
             </Switch>
           </Container>
         </main>
