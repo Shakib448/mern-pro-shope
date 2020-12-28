@@ -15,15 +15,15 @@ import { addToCart, removeFromCart } from "../../../redux/actions/cartActions";
 import Message from "../../Message/Message";
 
 const CartScreen = () => {
-  const { id } = useParams();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   const location = useLocation();
   const history = useHistory();
 
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  let { id } = useParams();
 
   useEffect(() => {
     if (id) {
