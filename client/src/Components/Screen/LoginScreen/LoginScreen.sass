@@ -1,0 +1,20 @@
+
+%fromStyles
+    background: lightgrey
+    height: 50px
+    border: none
+
+    &::placeholder
+        font-weight: bold
+        color: black
+
+    &:focus
+        box-shadow: none
+        outline : 0
+        border: none
+
+#email
+    @extend %fromStyles
+
+#password
+    @extend %fromStyles
