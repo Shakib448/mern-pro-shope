@@ -46,9 +46,15 @@ export const logOut = () => (dispatch) => {
 
 export const register = (name, email, password) => async (dispatch) => {
   try {
-    dispatch({ type: USER_REGISTER_REQUEST });
+    dispatch({
+      type: USER_REGISTER_REQUEST,
+    });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
     const { data } = await axios.post(
       "/api/users",
@@ -56,14 +62,19 @@ export const register = (name, email, password) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+    dispatch({
+      type: USER_REGISTER_SUCCESS,
+      payload: data,
+    });
 
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
-    console.log(error.response.data.message);
-
+    console.log(error);
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:
