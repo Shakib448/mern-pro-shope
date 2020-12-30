@@ -4,7 +4,10 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../Message/Message";
 import Loader from "../../Loader/Loader";
-import { getUserDetails } from "../../../redux/actions/userActions";
+import {
+  getUserDetails,
+  updateUserProfile,
+} from "../../../redux/actions/userActions";
 
 const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -22,6 +25,9 @@ const ProfileScreen = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
   useEffect(() => {
     if (!userInfo) {
@@ -43,6 +49,7 @@ const ProfileScreen = () => {
       setMessage("Password do not match");
     } else {
       //   Dispatch update profile
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
   return (
@@ -51,6 +58,7 @@ const ProfileScreen = () => {
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>
@@ -60,7 +68,6 @@ const ProfileScreen = () => {
               placeholder='Enter name...'
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId='email'>
@@ -70,7 +77,6 @@ const ProfileScreen = () => {
               placeholder='Enter email...'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId='password'>
@@ -80,7 +86,6 @@ const ProfileScreen = () => {
               placeholder='Enter password...'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId='confirmPassword'>
@@ -90,7 +95,6 @@ const ProfileScreen = () => {
               placeholder='Confirm password...'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
             ></Form.Control>
           </Form.Group>
           <Button
