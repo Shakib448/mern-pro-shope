@@ -65,19 +65,19 @@ const LoginScreen = () => {
         >
           Sign In
         </Button>
-
-        <Row className='py-3 '>
-          <Col>
-            New Customer?{" "}
-            <Link
-              className='text-dark text-decoration-none'
-              to={redirect ? `/register/?redirect=${redirect}` : "/register"}
-            >
-              <b>Register</b>
-            </Link>
-          </Col>
-        </Row>
       </Form>
+
+      <Row className='py-3 '>
+        <Col>
+          New Customer?{" "}
+          <Link
+            className='text-dark text-decoration-none'
+            to={redirect ? `/register/?redirect=${redirect}` : "/register"}
+          >
+            <b>Register</b>
+          </Link>
+        </Col>
+      </Row>
     </FormContainer>
   );
 };

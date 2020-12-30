@@ -100,19 +100,19 @@ const RegisterScreen = () => {
         >
           Register
         </Button>
-
-        <Row className='py-3 '>
-          <Col>
-            Have an Account?{" "}
-            <Link
-              className='text-dark text-decoration-none'
-              to={redirect ? `/login/?redirect=${redirect}` : "/login"}
-            >
-              <b>Login</b>
-            </Link>
-          </Col>
-        </Row>
       </Form>
+
+      <Row className='py-3 '>
+        <Col>
+          Have an Account?{" "}
+          <Link
+            className='text-dark text-decoration-none'
+            to={redirect ? `/login/?redirect=${redirect}` : "/login"}
+          >
+            <b>Login</b>
+          </Link>
+        </Col>
+      </Row>
     </FormContainer>
   );
 };
