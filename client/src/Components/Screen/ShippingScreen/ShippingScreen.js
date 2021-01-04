@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import "./ShippingScreen.sass";
-import FormContainer from "../../FormContainer.js/FormContainer";
+import FormContainer from "../../FormContainer/FormContainer";
 import { saveShippingAddress } from "../../../redux/actions/cartActions";
 import CheckoutStep from "../../CheckoutStep/CheckoutStep";
 

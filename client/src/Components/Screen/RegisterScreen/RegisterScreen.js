@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../Message/Message";
 import Loader from "../../Loader/Loader";
 import { register } from "../../../redux/actions/userActions";
-import FormContainer from "../../FormContainer.js/FormContainer";
+import FormContainer from "../../FormContainer/FormContainer";
 import "./RegisterScreen.sass";
 
 const RegisterScreen = () => {
