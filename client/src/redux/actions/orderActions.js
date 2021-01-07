@@ -100,12 +100,13 @@ export const payOrder = (id, order, paymentResult) => async (
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}/pay`, config);
+    const { data } = await axios.put(`/api/orders/${id}/pay`, paymentResult, config);
 
     dispatch({
       type: ORDER_PAY_SUCCESS,
       payload: data,
     });
+    
   } catch (error) {
     console.log(error);
     dispatch({
