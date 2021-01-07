@@ -51,6 +51,7 @@ const OrderScreen = () => {
 
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
+
       dispatch(getOrderDetails(id));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -62,7 +63,6 @@ const OrderScreen = () => {
   }, [dispatch, id, successPay, order]);
 
   const successPaymentHandler = (paymentResult) => {
-    console.trace(paymentResult);
     dispatch(payOrder(id, paymentResult));
   };
 
