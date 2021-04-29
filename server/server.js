@@ -30,7 +30,6 @@ app.use("/api/orders", orderRoutes);
 app.get("/api/config/paypal", (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
-console.log(process.env.PAYPAL_CLIENT_ID);
 
 // Not found api
 app.use(notFound);
