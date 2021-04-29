@@ -5,7 +5,7 @@ import Order from "../models/orderModel.js";
 // @routes POST/api/orders
 // @access private
 
-const addOrderItems = asyncHandler(async (req, res) => {
+export const addOrderItems = asyncHandler(async (req, res) => {
   const {
     user,
     orderItems,
@@ -42,7 +42,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @routes get/api/orders/:id
 // @access private
 
-const getOrderById = asyncHandler(async (req, res) => {
+export const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
     "user",
     "name email"
@@ -60,7 +60,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @routes get/api/orders/:id/pay
 // @access private
 
-const updateOrderToPaid = asyncHandler(async (req, res) => {
+export const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
   if (order) {
@@ -81,4 +81,11 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+// @Description Get Logged in user orders
+// @routes get/api/orders/myorders
+// @access private
+
+export const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  res.json(orders);
+});
