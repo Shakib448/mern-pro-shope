@@ -38,6 +38,7 @@ const OrderScreen = () => {
   useEffect(() => {
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
+      console.log(clientId);
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
@@ -69,14 +70,14 @@ const OrderScreen = () => {
   return loading ? (
     <Loader />
   ) : error ? (
-    <Message variant='danger'>{error}</Message>
+    <Message variant="danger">{error}</Message>
   ) : (
     <>
       <h1>Order {order._id}</h1>
 
       <Row>
         <Col md={8}>
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p style={{ fontWeight: "bold" }}>
@@ -86,7 +87,7 @@ const OrderScreen = () => {
                 <strong>
                   Email :{" "}
                   <a
-                    className='text-dark text-decoration-none '
+                    className="text-dark text-decoration-none "
                     href={`mailto:${order.user.email}`}
                   >
                     {" "}
@@ -101,12 +102,12 @@ const OrderScreen = () => {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant='success'>
+                <Message variant="success">
                   {" "}
                   Delivered on {order.deliveredAt}{" "}
                 </Message>
               ) : (
-                <Message variant='danger'>Not Delivered</Message>
+                <Message variant="danger">Not Delivered</Message>
               )}
             </ListGroup.Item>
 
@@ -116,9 +117,9 @@ const OrderScreen = () => {
                 <strong>Method : {order.paymentMethod}</strong>
               </p>
               {order.isPaid ? (
-                <Message variant='success'> Paid on {order.paidAt} </Message>
+                <Message variant="success"> Paid on {order.paidAt} </Message>
               ) : (
-                <Message variant='danger'>Not Paid</Message>
+                <Message variant="danger">Not Paid</Message>
               )}
             </ListGroup.Item>
 
@@ -127,7 +128,7 @@ const OrderScreen = () => {
               {order.orderItems.length === 0 ? (
                 <Message>Your order is empty</Message>
               ) : (
-                <ListGroup variant='flush'>
+                <ListGroup variant="flush">
                   {order.orderItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
@@ -141,7 +142,7 @@ const OrderScreen = () => {
                         </Col>
                         <Col>
                           <Link
-                            className='text-dark text-decoration-none '
+                            className="text-dark text-decoration-none "
                             style={{ fontWeight: "bold" }}
                             to={`/product/${item.product}`}
                           >
@@ -162,7 +163,7 @@ const OrderScreen = () => {
         </Col>
         <Col md={4}>
           <Card>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
