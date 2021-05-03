@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Loader/Loader";
@@ -15,7 +15,10 @@ const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false);
 
   const { id } = useParams();
+  const history = useHistory();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const orderDetails = useSelector((state) => state.orderDetails);
 
   const { order, loading, error } = orderDetails;
@@ -64,8 +67,11 @@ const OrderScreen = () => {
   }, [dispatch, id, successPay, order]);
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
     dispatch(getOrderDetails(id));
-  }, [dispatch, id]);
+  }, [dispatch, history, userInfo, id]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
