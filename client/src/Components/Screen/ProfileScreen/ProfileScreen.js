@@ -39,12 +39,14 @@ const ProfileScreen = () => {
     } else {
       if (!user.name) {
         dispatch(getUserDetails("profile"));
-        dispatch(listMyOrder());
+        // Change
+        // dispatch(listMyOrder());
       } else {
         setName(user.name);
         setEmail(user.email);
       }
     }
+    dispatch(listMyOrder());
   }, [dispatch, history, userInfo, user]);
 
   const submitHandler = (e) => {

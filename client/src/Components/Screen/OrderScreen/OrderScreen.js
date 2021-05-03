@@ -52,8 +52,8 @@ const OrderScreen = () => {
 
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
-
-      dispatch(getOrderDetails(id));
+      // Change
+      // dispatch(getOrderDetails(id));
     } else if (!order.isPaid) {
       if (!window.paypal) {
         addPayPalScript();
@@ -62,6 +62,10 @@ const OrderScreen = () => {
       }
     }
   }, [dispatch, id, successPay, order]);
+
+  useEffect(() => {
+    dispatch(getOrderDetails(id));
+  }, [dispatch, id]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
