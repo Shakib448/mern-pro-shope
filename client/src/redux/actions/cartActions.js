@@ -27,7 +27,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({ type: CART_REMOVE, payload: id });
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+  localStorage.removeItem(
+    "cartItems",
+    JSON.stringify(getState().cart.cartItems)
+  );
 };
 
 // Sava shipping address

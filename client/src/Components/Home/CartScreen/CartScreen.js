@@ -20,7 +20,8 @@ const CartScreen = () => {
   const { cartItems } = cart;
   const location = useLocation();
   const history = useHistory();
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
   let { id } = useParams();
@@ -35,6 +36,10 @@ const CartScreen = () => {
     dispatch(removeFromCart(id));
   };
 
+  if (!userInfo) {
+    history.push("/login");
+    localStorage.removeItem("cartItems");
+  }
   const checkoutHandler = () => {
     history.push("/login?redirect=shipping");
   };
@@ -52,13 +57,13 @@ const CartScreen = () => {
                 color: "black",
                 fontWeight: "bold",
               }}
-              to='/'
+              to="/"
             >
               Go Back
             </Link>{" "}
           </Message>
         ) : (
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             {cartItems.map((item) => (
               <ListGroup.Item key={item.product}>
                 <Row>
@@ -81,7 +86,7 @@ const CartScreen = () => {
                   <Col md={2}>
                     <Form>
                       <Form.Control
-                        as='select'
+                        as="select"
                         value={item.qty}
                         onChange={(e) =>
                           dispatch(
@@ -100,11 +105,11 @@ const CartScreen = () => {
                   </Col>
                   <Col md={2}>
                     <Button
-                      type='button'
-                      variant='light'
+                      type="button"
+                      variant="light"
                       onClick={() => removeFromCartItem(item.product)}
                     >
-                      <i className='fas fa-trash'></i> Remove
+                      <i className="fas fa-trash"></i> Remove
                     </Button>
                   </Col>
                 </Row>
@@ -115,7 +120,7 @@ const CartScreen = () => {
       </Col>
       <Col md={4}>
         <Card>
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             <ListGroup.Item>
               <h4>
                 {" "}
@@ -128,11 +133,11 @@ const CartScreen = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
-                type='button'
-                className='btn-block'
+                type="button"
+                className="btn-block"
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
-                variant='dark'
+                variant="dark"
               >
                 Proceed To Checkout
               </Button>

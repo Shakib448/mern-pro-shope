@@ -66,12 +66,12 @@ const OrderScreen = () => {
     }
   }, [dispatch, id, successPay, order]);
 
+  if (!userInfo) {
+    history.push("/login");
+  }
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login");
-    }
     dispatch(getOrderDetails(id));
-  }, [dispatch, history, userInfo, id]);
+  }, [dispatch, id]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
