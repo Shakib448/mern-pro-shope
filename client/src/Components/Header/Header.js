@@ -16,21 +16,21 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand as={Link} to='/'>
+          <Navbar.Brand as={Link} to="/">
             ProShop
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/cart'>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Link as={Link} to="/cart">
                 {" "}
-                <i className='fas fa-shopping-cart'></i> Cart
+                <i className="fas fa-shopping-cart"></i> Cart
               </Nav.Link>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
-                  <NavDropdown.Item as={Link} to='/profile'>
+                <NavDropdown title={userInfo.name} id="username">
+                  <NavDropdown.Item as={Link} to="/profile">
                     Profile
                   </NavDropdown.Item>
                   <NavDropdown.Item onClick={logoutHandler}>
@@ -38,10 +38,23 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <Nav.Link as={Link} to='/login'>
+                <Nav.Link as={Link} to="/login">
                   {" "}
-                  <i className='fas fa-user'></i> Sign In
+                  <i className="fas fa-user"></i> Sign In
                 </Nav.Link>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <NavDropdown.Item as={Link} to="/admin/userList">
+                    Users
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="admin/product-list">
+                    Products
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="admin/order-list">
+                    Orders
+                  </NavDropdown.Item>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>

@@ -12,25 +12,27 @@ import ShippingScreen from "./Components/Screen/ShippingScreen/ShippingScreen";
 import PaymentScreen from "./Components/Screen/PaymentScreen/PaymentScreen";
 import PlaceOrderScreen from "./Components/Screen/PlaceOrderScreen/PlaceOrderScreen";
 import OrderScreen from "./Components/Screen/OrderScreen/OrderScreen";
+import UserListScreen from "./Components/Screen/UserListScreen/UserListScreen";
 
 function App() {
   return (
     <>
       <Router>
         <Header />
-        <main className='py-3'>
+        <main className="py-3">
           <Container>
             <Switch>
-              <Route exact path='/order/:id' component={OrderScreen} />
-              <Route exact path='/shipping' component={ShippingScreen} />
-              <Route exact path='/placeOrder' component={PlaceOrderScreen} />
-              <Route exact path='/payment' component={PaymentScreen} />
-              <Route exact path='/login' component={LoginScreen} />
-              <Route exact path='/register' component={RegisterScreen} />
-              <Route exact path='/profile' component={ProfileScreen} />
-              <Route exact path='/product/:id' component={ProductScreen} />
-              <Route exact path='/cart/:id?' component={CartScreen} />
-              <Route exact path='/' component={Home} />
+              <Route exact path="/order/:id" component={OrderScreen} />
+              <Route exact path="/shipping" component={ShippingScreen} />
+              <Route exact path="/placeOrder" component={PlaceOrderScreen} />
+              <Route exact path="/payment" component={PaymentScreen} />
+              <Route exact path="/login" component={LoginScreen} />
+              <Route exact path="/register" component={RegisterScreen} />
+              <Route exact path="/profile" component={ProfileScreen} />
+              <Route exact path="/product/:id" component={ProductScreen} />
+              <Route exact path="/cart/:id?" component={CartScreen} />
+              <Route exact path="/admin/userList" component={UserListScreen} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </Container>
         </main>
