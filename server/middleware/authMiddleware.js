@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler";
 import dotenv from "dotenv";
 dotenv.config();
 
-const protect = asyncHandler(async (req, res, next) => {
+export const protect = asyncHandler(async (req, res, next) => {
   let token;
 
   if (
@@ -31,4 +31,11 @@ const protect = asyncHandler(async (req, res, next) => {
   next();
 });
 
-export { protect };
+export const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as an admin");
+  }
+};
