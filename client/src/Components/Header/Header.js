@@ -29,7 +29,7 @@ const Header = () => {
                 <i className="fas fa-shopping-cart"></i> Cart
               </Nav.Link>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+                <NavDropdown title={userInfo.name.split(" ")[0]} id="username">
                   <NavDropdown.Item as={Link} to="/profile">
                     Profile
                   </NavDropdown.Item>
