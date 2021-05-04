@@ -4,9 +4,10 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../Message/Message";
 import Loader from "../../Loader/Loader";
-import { getUserDetails } from "../../../redux/actions/userActions";
+import { getUserDetails, updateUser } from "../../../redux/actions/userActions";
 import FormContainer from "../../FormContainer/FormContainer";
 import "../RegisterScreen/RegisterScreen.sass";
+import { USER_UPDATE_RESET } from "../../../redux/constants/userConstants";
 
 const UserEditScreen = () => {
   const { id } = useParams();
@@ -24,20 +25,32 @@ const UserEditScreen = () => {
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-  console.log(user);
+
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const {
+    loading: updateLoading,
+    error: updateError,
+    success: updateSuccess,
+  } = userUpdate;
 
   useEffect(() => {
-    if (!user.name || user._id !== id) {
-      dispatch(getUserDetails(id));
+    if (updateSuccess) {
+      dispatch({ type: USER_UPDATE_RESET });
+      history.push("/admin/userList");
     } else {
-      setName(user.name);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
+      if (!user.name || user._id !== id) {
+        dispatch(getUserDetails(id));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setIsAdmin(user.isAdmin);
+      }
     }
-  }, [dispatch, id, user]);
+  }, [dispatch, id, user, updateSuccess, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(updateUser({ _id: id, name, email, isAdmin }));
   };
   return (
     <>
@@ -46,6 +59,8 @@ const UserEditScreen = () => {
       </Link>
       <FormContainer>
         <h1>Edit User</h1>
+        {updateLoading && <Loader />}
+        {updateError && <Message variant="danger">{updateError}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -54,13 +69,14 @@ const UserEditScreen = () => {
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name">
               <Form.Label style={{ fontWeight: "bold", marginTop: "10px" }}>
-                Name{" "}
+                Name
               </Form.Label>
               <Form.Control
                 type="name"
                 placeholder="Enter name..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                disabled
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="email">
@@ -72,6 +88,7 @@ const UserEditScreen = () => {
                 placeholder="Enter email..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="isAdmin">
