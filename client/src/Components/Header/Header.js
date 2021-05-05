@@ -25,7 +25,6 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link as={Link} to="/cart">
-                {" "}
                 <i className="fas fa-shopping-cart"></i> Cart
               </Nav.Link>
               {userInfo ? (
@@ -39,7 +38,6 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <Nav.Link as={Link} to="/login">
-                  {" "}
                   <i className="fas fa-user"></i> Sign In
                 </Nav.Link>
               )}
@@ -48,10 +46,10 @@ const Header = () => {
                   <NavDropdown.Item as={Link} to="/admin/userList">
                     Users
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="admin/product-list">
+                  <NavDropdown.Item as={Link} to="/admin/productList">
                     Products
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="admin/order-list">
+                  <NavDropdown.Item as={Link} to="/admin/orderList">
                     Orders
                   </NavDropdown.Item>
                 </NavDropdown>
