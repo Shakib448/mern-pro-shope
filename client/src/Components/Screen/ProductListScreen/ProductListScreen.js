@@ -33,11 +33,7 @@ const ProductListScreen = () => {
       // Delete product
     }
   };
-  const creatProductHandler = (id) => {
-    if (window.confirm("Are you sure you want to delete")) {
-      // Delete product
-    }
-  };
+  const creatProductHandler = (product) => {};
   return (
     <>
       <Row className="align-items-center">
@@ -45,7 +41,7 @@ const ProductListScreen = () => {
           <h1>Products</h1>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={creatProductHandler}>
+          <Button className="my-3 btn-dark" onClick={creatProductHandler}>
             <i className="fas fa-plus"></i> Create Product
           </Button>
         </Col>
