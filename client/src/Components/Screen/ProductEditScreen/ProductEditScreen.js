@@ -4,9 +4,13 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../Message/Message";
 import Loader from "../../Loader/Loader";
-import { listProductDetails } from "../../../redux/actions/productActions";
+import {
+  listProductDetails,
+  updateProduct,
+} from "../../../redux/actions/productActions";
 import FormContainer from "../../FormContainer/FormContainer";
 import "../RegisterScreen/RegisterScreen.sass";
+import { PRODUCT_UPDATE_RESET } from "../../../redux/constants/productConstants";
 
 const ProductEditScreen = () => {
   const { id } = useParams();
@@ -29,22 +33,44 @@ const ProductEditScreen = () => {
   const productDetails = useSelector((state) => state.productDetail);
   const { product, loading, error } = productDetails;
 
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate;
+
   useEffect(() => {
-    if (!product.name || product._id !== id) {
-      dispatch(listProductDetails(id));
+    if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push("/admin/productList");
     } else {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image);
-      setCountInStock(product.countInStock);
-      setCategory(product.category);
-      setDescription(product.description);
+      if (!product.name || product._id !== id) {
+        dispatch(listProductDetails(id));
+      } else {
+        setName(product.name);
+        setPrice(product.price);
+        setImage(product.image);
+        setCountInStock(product.countInStock);
+        setCategory(product.category);
+        setDescription(product.description);
+      }
     }
-  }, [dispatch, id, product]);
+  }, [dispatch, id, product, history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // Update Product
+    dispatch(
+      updateProduct({
+        _id: id,
+        name,
+        price,
+        image,
+        category,
+        countInStock,
+        description,
+      })
+    );
   };
   return (
     <>
@@ -53,8 +79,8 @@ const ProductEditScreen = () => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-        {/* {updateLoading && <Loader />}
-        {updateError && <Message variant="danger">{updateError}</Message>} */}
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
