@@ -36,7 +36,7 @@ app.get("/api/config/paypal", (req, res) =>
 
 // File
 const __dirname = path.resolve();
-app.use("/upload", express.static(path.join(__dirname, "/uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // Not found api
 app.use(notFound);
