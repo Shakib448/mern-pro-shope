@@ -78,13 +78,13 @@ const OrderScreen = () => {
     }
   }, [dispatch, id, successPay, order, successDeliver]);
 
-  if (!userInfo) {
-    history.push("/login");
-  }
   // Change
   useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
     dispatch(getOrderDetails(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, history, userInfo]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
@@ -231,18 +231,21 @@ const OrderScreen = () => {
                   )}
                 </ListGroup.Item>
               )}
-              {userInfo?.isAdmin && order?.isPaid && !order?.isDelivered && (
-                <ListGroup.Item>
-                  {loadingDeliver && <Loader />}
-                  <Button
-                    type="button"
-                    className="btn btn-block btn-dark"
-                    onClick={deliverHandler}
-                  >
-                    Mark As Delivered
-                  </Button>
-                </ListGroup.Item>
-              )}
+              {userInfo &&
+                userInfo?.isAdmin &&
+                order?.isPaid &&
+                !order?.isDelivered && (
+                  <ListGroup.Item>
+                    {loadingDeliver && <Loader />}
+                    <Button
+                      type="button"
+                      className="btn btn-block btn-dark"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
