@@ -129,7 +129,6 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
 };
 
 export const deliverOrder = (order) => async (dispatch, getState) => {
-  console.log(order);
   try {
     dispatch({
       type: ORDER_DELIVER_REQUEST,
