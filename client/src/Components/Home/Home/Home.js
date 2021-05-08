@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { listProduct } from "../../../redux/actions/productActions";
 import Loader from "../../Loader/Loader";
 import Message from "../../Message/Message";
@@ -8,13 +9,14 @@ import Product from "../Product/Product";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { keyword } = useParams();
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    dispatch(listProduct());
-  }, [dispatch]);
+    dispatch(listProduct(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>
@@ -22,7 +24,7 @@ const Home = () => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'> {error} </Message>
+        <Message variant="danger"> {error} </Message>
       ) : (
         <Row>
           {products.map((product) => (

@@ -56,6 +56,7 @@ function App() {
                 path="/admin/orderList"
                 component={OrderListScreen}
               />
+              <Route exact path="/search/:keyword" component={Home} />
               <Route exact path="/" component={Home} />
             </Switch>
           </Container>
