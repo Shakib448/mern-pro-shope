@@ -24,7 +24,7 @@ const Home = ({ match }) => {
   return (
     <>
       {!keyword && <ProductCarousel />}
-      <h1>Latest Products</h1>
+      <h1 className="mt-4">Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
