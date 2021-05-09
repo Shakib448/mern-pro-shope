@@ -9,6 +9,7 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import path from "path";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import morgan from "morgan";
+import cors from "cors";
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,6 +22,7 @@ app.use(morgan("dev"));
 // Body parser
 
 app.use(express.json());
+app.use(cors());
 
 dotenv.config();
 

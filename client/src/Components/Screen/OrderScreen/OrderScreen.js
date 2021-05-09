@@ -10,7 +10,7 @@ import {
   payOrder,
 } from "../../../redux/actions/orderActions";
 import { PayPalButton } from "react-paypal-button-v2";
-import axios from "axios";
+import axios from "../../../Components/Axios/AxiosConfig";
 import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,

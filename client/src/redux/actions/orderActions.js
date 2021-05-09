@@ -18,7 +18,7 @@ import {
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
 } from "../constants/orderConstants";
-import axios from "axios";
+import axios from "../../Components/Axios/AxiosConfig";
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {

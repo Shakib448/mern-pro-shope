@@ -24,7 +24,7 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
 } from "../constants/userConstants";
-import axios from "axios";
+import axios from "../../Components/Axios/AxiosConfig";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
 export const login = (email, password) => async (dispatch) => {

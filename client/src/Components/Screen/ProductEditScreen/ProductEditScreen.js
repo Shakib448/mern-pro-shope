@@ -11,7 +11,7 @@ import {
 import FormContainer from "../../FormContainer/FormContainer";
 import "../RegisterScreen/RegisterScreen.sass";
 import { PRODUCT_UPDATE_RESET } from "../../../redux/constants/productConstants";
-import axios from "axios";
+import axios from "../../../Components/Axios/AxiosConfig";
 
 const ProductEditScreen = () => {
   const { id } = useParams();

@@ -18,7 +18,7 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
 } from "../constants/productConstants";
-import axios from "axios";
+import axios from "../../Components/Axios/AxiosConfig";
 
 export const listProduct = (keyword = "", pageNumber = "") => async (
   dispatch
@@ -32,7 +32,7 @@ export const listProduct = (keyword = "", pageNumber = "") => async (
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log(error?.response?.data?.message);
 
     dispatch({
       type: PRODUCT_LIST_FAIL,
