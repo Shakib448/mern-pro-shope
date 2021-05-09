@@ -71,16 +71,14 @@ const CartScreen = () => {
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
-                    <Link
+                    <h6
                       style={{
-                        textDecoration: "none",
                         color: "black",
                         fontWeight: "bold",
                       }}
-                      to={`/product/${item.id}`}
                     >
                       {item.name}
-                    </Link>
+                    </h6>
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
