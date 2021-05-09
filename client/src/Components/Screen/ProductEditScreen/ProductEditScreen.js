@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../../Message/Message";
 import Loader from "../../Loader/Loader";
 import {
   listProductDetails,
@@ -12,6 +11,7 @@ import FormContainer from "../../FormContainer/FormContainer";
 import "../RegisterScreen/RegisterScreen.sass";
 import { PRODUCT_UPDATE_RESET } from "../../../redux/constants/productConstants";
 import axios from "../../../Components/Axios/AxiosConfig";
+import Error from "../../Error/Error";
 
 const ProductEditScreen = () => {
   const { id } = useParams();
@@ -108,11 +108,11 @@ const ProductEditScreen = () => {
       <FormContainer>
         <h1>Edit Product</h1>
         {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+        {errorUpdate && <Error variant="danger">{errorUpdate}</Error>}
         {loading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger">{error}</Message>
+          <Error variant="danger">{error}</Error>
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name">

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../../Message/Message";
 import Loader from "../../Loader/Loader";
+import Error from "../../Error/Error";
 import {
   createProduct,
   deleteProduct,
@@ -85,13 +85,13 @@ const ProductListScreen = ({ match }) => {
         </Col>
       </Row>
       {loadingDelete && <Loader />}
-      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+      {errorDelete && <Error variant="danger">{errorDelete}</Error>}
       {loadingCreate && <Loader />}
-      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
+      {errorCreate && <Error variant="danger">{errorCreate}</Error>}
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Error variant="danger">{error}</Error>
       ) : (
         <>
           <Table striped bordered hover responsive className="table-sm">
