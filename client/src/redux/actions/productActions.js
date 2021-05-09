@@ -18,7 +18,6 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
 } from "../constants/productConstants";
-import Axios from "axios";
 import axios from "axios";
 
 export const listProduct = (keyword = "", pageNumber = "") => async (
@@ -27,7 +26,7 @@ export const listProduct = (keyword = "", pageNumber = "") => async (
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
     );
 
@@ -49,7 +48,7 @@ export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await Axios.get("/api/products/" + id);
+    const { data } = await axios.get("/api/products/" + id);
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {

@@ -33,6 +33,7 @@ export const productsListReducer = (state = { products: [] }, action) => {
       return {
         loading: false,
         products: action.payload.products,
+        topProduct: action.payload.topProduct,
         pages: action.payload.pages,
         page: action.payload.page,
       };

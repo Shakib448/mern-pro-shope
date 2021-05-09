@@ -7,6 +7,7 @@ import Loader from "../../Loader/Loader";
 import Message from "../../Message/Message";
 import Paginate from "../../Paginate/Paginate";
 import Product from "../Product/Product";
+import ProductCarousel from "../../ProductCarousel/ProductCarousel";
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Home = ({ match }) => {
 
   return (
     <>
+      {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />
