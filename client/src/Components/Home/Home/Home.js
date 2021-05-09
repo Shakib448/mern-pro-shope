@@ -5,21 +5,20 @@ import { useParams } from "react-router-dom";
 import { listProduct } from "../../../redux/actions/productActions";
 import Loader from "../../Loader/Loader";
 import Message from "../../Message/Message";
+import Paginate from "../../Paginate/Paginate";
 import Product from "../Product/Product";
 
-const Home = () => {
+const Home = ({ match }) => {
   const dispatch = useDispatch();
   const { keyword } = useParams();
-  const { pageNumber } = useParams();
-
-  const numberPage = pageNumber || 1;
+  const pageNumber = match.params.pageNumber || 1;
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProduct(keyword, numberPage));
-  }, [dispatch, keyword, numberPage]);
+    dispatch(listProduct(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <>
@@ -29,13 +28,20 @@ const Home = () => {
       ) : error ? (
         <Message variant="danger"> {error} </Message>
       ) : (
-        <Row>
-          {products.map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={3} xl={3}>
-              <Product product={product} />
-            </Col>
-          ))}
-        </Row>
+        <>
+          <Row>
+            {products.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={3} xl={3}>
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ""}
+          />
+        </>
       )}
     </>
   );
