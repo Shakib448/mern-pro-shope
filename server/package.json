@@ -10,8 +10,7 @@
     "client": "npm start --prefix ../client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node seeder",
-    "data:destroy": "node seeder -d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../client && npm run build --prefix ../client"
+    "data:destroy": "node seeder -d"
   },
   "author": "MUKTADIR",
   "license": "ISC",
