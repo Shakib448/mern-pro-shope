@@ -42,6 +42,9 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    cloudinary_id: {
+      type: String,
+    },
     reviews: [reviewSchema],
     rating: {
       type: Number,
@@ -66,6 +69,7 @@ const productSchema = mongoose.Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 

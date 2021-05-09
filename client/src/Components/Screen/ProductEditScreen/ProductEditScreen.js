@@ -18,6 +18,7 @@ const ProductEditScreen = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  const [cloudId, setCloudId] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState(false);
@@ -71,6 +72,7 @@ const ProductEditScreen = () => {
         category,
         countInStock,
         description,
+        cloudId,
       })
     );
   };
@@ -90,7 +92,8 @@ const ProductEditScreen = () => {
 
       const { data } = await axios.post("/api/upload", formData, config);
 
-      setImage(data);
+      setImage(data.image);
+      setCloudId(data.cloudinary_id);
       setUploading(false);
     } catch (error) {
       console.error(error);

@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+import cloudinary from "../utils/cloudinary.js";
 
 // @Description Fetch all products
 // @routes GET/api/products
@@ -45,9 +46,9 @@ export const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    const removeProduct = await product.remove();
+    await product.remove();
+    await cloudinary.uploader.destroy(product.cloudinary_id);
     res.json({ message: "Product removed" });
-    return removeProduct;
   } else {
     res.status(404);
     throw new Error("Product not found");
@@ -78,7 +79,16 @@ export const createProduct = asyncHandler(async (req, res) => {
 // @access Private/Admin
 
 export const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, category, countInStock } = req.body;
+  const {
+    name,
+    price,
+    description,
+    image,
+    category,
+    countInStock,
+    cloudId,
+  } = req.body;
+
   const product = await Product.findById(req.params.id);
   if (product) {
     product.name = name;
@@ -87,6 +97,7 @@ export const updateProduct = asyncHandler(async (req, res) => {
     product.image = image;
     product.countInStock = countInStock;
     product.category = category;
+    product.cloudinary_id = cloudId;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
@@ -131,13 +142,4 @@ export const createProductReview = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Product not found");
   }
-});
-
-// @Description Get Top Rated Products
-// @routes Get/api/products/top
-// @access Public
-
-export const getTopProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
-  res.json(products);
 });
