@@ -18,6 +18,7 @@ import {
 import Loader from "../../Loader/Loader";
 import Message from "../../Message/Message";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../../../redux/constants/productConstants";
+import { Alert } from "react-bootstrap";
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
@@ -156,7 +157,9 @@ const ProductScreen = () => {
           <Row>
             <Col md={6}>
               <h2>Reviews</h2>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
+              {product.reviews.length === 0 && (
+                <Alert variant="info">No Reviews</Alert>
+              )}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
