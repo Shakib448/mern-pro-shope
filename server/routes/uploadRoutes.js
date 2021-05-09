@@ -3,6 +3,17 @@ import express from "express";
 import multer from "multer";
 const router = express.Router();
 
+import cloudinary from "cloudinary";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SCRECT,
+});
+
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, "uploads/");
@@ -34,8 +45,15 @@ const upload = multer({
   },
 });
 
-router.post("/", upload.single("image"), (req, res) => {
-  res.send(`/${req.file.path}`);
+router.post("/", upload.single("image"), async (req, res) => {
+  try {
+    const result = await cloudinary.v2.uploader.upload(req.file.path, {
+      upload_preset: "ml_default",
+    });
+    res.send(result.url);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export default router;

@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.25.1",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
