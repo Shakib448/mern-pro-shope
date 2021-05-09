@@ -22,6 +22,7 @@ const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false);
 
   const { id } = useParams();
+  console.log(id);
   const history = useHistory();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -51,6 +52,10 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
       const script = document.createElement("script");
@@ -60,14 +65,12 @@ const OrderScreen = () => {
       script.onload = () => {
         setSdkReady(true);
       };
-
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || successDeliver) {
+    if (!order || successPay || successDeliver || order._id !== id) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
-      // Change
       dispatch(getOrderDetails(id));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -76,14 +79,7 @@ const OrderScreen = () => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, id, successPay, order, successDeliver]);
-
-  if (!userInfo) {
-    history.push("/login");
-  }
-  useEffect(() => {
-    dispatch(getOrderDetails(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, successPay, successDeliver, order, userInfo, history]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
