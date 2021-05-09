@@ -10,13 +10,16 @@ import Product from "../Product/Product";
 const Home = () => {
   const dispatch = useDispatch();
   const { keyword } = useParams();
+  const { pageNumber } = useParams();
+
+  const numberPage = pageNumber || 1;
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    dispatch(listProduct(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProduct(keyword, numberPage));
+  }, [dispatch, keyword, numberPage]);
 
   return (
     <>
