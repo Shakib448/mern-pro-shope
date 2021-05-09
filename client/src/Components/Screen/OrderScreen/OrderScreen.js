@@ -53,7 +53,6 @@ const OrderScreen = () => {
   useEffect(() => {
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
-      console.log(clientId);
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
@@ -79,13 +78,12 @@ const OrderScreen = () => {
     }
   }, [dispatch, id, successPay, order, successDeliver]);
 
-  // Change
+  if (!userInfo) {
+    history.push("/login");
+  }
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login");
-    }
     dispatch(getOrderDetails(id));
-  }, [dispatch, id, history, userInfo]);
+  }, [dispatch, id]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
@@ -131,7 +129,6 @@ const OrderScreen = () => {
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  {" "}
                   Delivered on {order.deliveredAt}{" "}
                 </Message>
               ) : (
