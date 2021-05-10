@@ -39,6 +39,7 @@ function App() {
                 path="/search/product/:id"
                 component={ProductScreen}
               />
+              <Route exact path="/cart/product/:id" component={ProductScreen} />
               <Route exact path="/cart/:id?" component={CartScreen} />
               <Route exact path="/admin/userList" component={UserListScreen} />
               <Route
