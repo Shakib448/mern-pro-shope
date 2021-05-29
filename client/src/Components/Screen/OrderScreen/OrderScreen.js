@@ -22,7 +22,6 @@ const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false);
 
   const { id } = useParams();
-  console.log(id);
   const history = useHistory();
 
   const userLogin = useSelector((state) => state.userLogin);
